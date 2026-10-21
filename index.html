@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#faf5f0" />
+  <meta name="color-scheme" content="light only" />
+  <link rel="icon" type="image/png" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <title>Алексей и Юлия · 14 ноября</title>
+  <meta name="description" content="Приглашение на свадьбу Алексея и Юлии — 14 ноября, 15:00" />
+
+  <!-- Open Graph (красивое превью при отправке ссылки) --> 
+  <meta property="og:title" content="Алексей и Юлия · Свадьба 14 ноября" />
+  <meta property="og:description" content="С радостью приглашаем вас разделить с нами этот день" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="photo/hands.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Marck+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="locked">
+
+  <!-- ============ КОНВЕРТ (полноэкранный) ============= -->
+  <div class="envelope-stage" id="stage">
+    <!-- 4 клапана конверта тайлят весь экран и раскрываются наружу -->
+    <div class="ef ef-top">
+      <div class="env-caption">
+        <span class="line1">Приглашение</span>
+        <span class="line2">на свадьбу</span>
+      </div>
+    </div>
+    <div class="ef ef-right"></div>
+    <div class="ef ef-bottom"></div>
+    <div class="ef ef-left"></div>
+
+    <!-- сургучная печать по центру (картинка с тиснением «НАЖМИТЕ») -->
+    <div class="seal" id="seal" aria-hidden="true"></div>
+  </div>
+
+  <!-- ============ КНОПКА МУЗЫКИ ============ -->
+  <button class="music-toggle" id="music-toggle" aria-label="Музыка" hidden>
+    <svg class="music-ring" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <path id="circlePath" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" />
+      </defs>
+      <text class="ring-text"><textPath href="#circlePath" startOffset="0%">нажмите, чтобы включить или отключить музыку · </textPath></text>
+    </svg>
+    <span class="music-icon" id="music-icon">
+      <!-- pause/play вставляется из JS -->
+    </span>
+  </button>
+
+  <!-- фоновая музыка -->
+  <audio id="bg-music" loop preload="none"></audio>
+
+  <!-- ============ САЙТ ============ -->
+  <main class="site" id="site">
+
+    <!-- HERO (обложка) -->
+    <header class="hero" id="hero">
+      <div class="sparkle-container" id="sparkles" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <p class="eyebrow">мы женимся</p>
+        <h1 class="names script" id="hero-names">Алексей <span class="amp">&amp;</span> Юлия</h1>
+        <div class="hero-frame">
+          <div class="hero-photo" id="hero-photo"></div>
+        </div>
+        <p class="hero-date" id="hero-date">05 / 09</p>
+      </div>
+
+      <div class="scroll-cue">листайте<span></span></div>
+    </header>
+
+    <!-- ПРИГЛАШЕНИЕ + КАЛЕНДАРЬ -->
+    <section class="center">
+      <div class="wrap">
+        <h2 class="script-title reveal">Дорогие гости!</h2>
+        <p class="lead reveal d1">
+          Мы очень хотим сделать этот день особенным, поэтому приглашаем вас
+          разделить с нами торжество, посвящённое дню нашей свадьбы!
+        </p>
+
+        <div class="calendar reveal d2" id="calendar"><!-- из JS --></div>
+      </div>
+    </section>
+
+    <!-- ТАЙМ-ЛАЙН ДНЯ -->
+    <section class="section-alt timeline-section">
+      <div class="wrap center">
+        <p class="eyebrow reveal">программа дня</p>
+        <h2 class="script-title reveal d1">Как пройдёт день</h2>
+      </div>
+      <div class="timeline" id="timeline">
+        <svg class="timeline-svg" id="timeline-svg" preserveAspectRatio="none" aria-hidden="true">
+          <path class="tl-path-bg" id="tl-path-bg" fill="none" />
+          <path class="tl-path" id="tl-path" fill="none" />
+        </svg>
+        <div class="tl-heart" id="tl-heart" aria-hidden="true">
+          <svg viewBox="0 0 32 29" fill="currentColor"><path d="M16 29s-13-8.4-13-17.3C3 6.6 6.6 3 11 3c2.7 0 4.3 1.4 5 2.6C16.7 4.4 18.3 3 21 3c4.4 0 8 3.6 8 8.7C29 20.6 16 29 16 29z"/></svg>
+        </div>
+        <div class="tl-events" id="tl-events"><!-- из JS --></div>
+      </div>
+    </section>
+
+    <!-- ЛОКАЦИЯ -->
+    <section class="center">
+      <div class="wrap">
+        <p class="eyebrow reveal">где нас найти</p>
+        <h2 class="script-title reveal d1">Место проведения</h2>
+
+        <div class="venue-photo reveal d1" id="venue-photo"></div>
+
+        <div class="place-card reveal d2">
+          <div class="venue" id="venue-name">Уточняется</div>
+          <div class="addr" id="venue-addr">Точный адрес сообщим дополнительно</div>
+          <button class="btn" id="map-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            Построить маршрут
+          </button>
+          <p style="font-size:12px;color:var(--c-muted);margin-top:14px">Откроется приложение карт на вашем устройстве</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ДРЕСС-КОД -->
+    <section class="section-alt center">
+      <div class="wrap">
+        <p class="eyebrow reveal">пожелания к образу</p>
+        <h2 class="script-title reveal d1">Дресс-код</h2>
+        <p class="lead reveal d2" id="dc-text"></p>
+      </div>
+    </section>
+
+    <!--ПОЖЕЛАНИЯ -->
+    
+     <section class="center">
+      <div class="wrap">
+        <p class="eyebrow reveal">несколько важных моментов</p>
+        <h2 class="script-title reveal d1">Детали</h2>
+        <p class="lead reveal d1">
+          Самый ценный подарок — ваше присутствие. Если вы хотите поздравить нас подарком, мы будем благодарны за вклад в наши мечты.
+        </p>
+        <p class="lead reveal d1">
+          Не переживайте — мы не будем вызывать гостей говорить тосты. Во время нашей свадьбы будет действовать «открытый микрофон».
+        </p>
+        <p class="lead reveal d1">
+          Самое главное — приходите с хорошим настроением, чтобы вместе с нами насладиться этим праздником.
+        </p>
+        <p class="lead reveal d1">
+          Цветы радуют всего пару дней, а доброе дело останется надолго. Мы хотим поддержать приют и если у вас есть желание к нам присоединиться, то вместо цветов вы можете принести корм для хвостиков.
+        </p>
+      </div>
+    </section>
+
+    <!-- ДО ВСТРЕЧИ -->
+    <section class="section-alt center">
+      <div class="wrap">
+        <p class="eyebrow reveal">осталось совсем немного</p>
+        <h2 class="script-title reveal d1">До встречи через</h2>
+        <div class="countdown reveal d2" id="countdown" aria-label="Обратный отсчёт">
+          <div class="cd-item"><b id="cd-days">—</b><span>дней</span></div>
+          <div class="cd-item"><b id="cd-hours">—</b><span>часов</span></div>
+          <div class="cd-item"><b id="cd-min">—</b><span>минут</span></div>
+          <div class="cd-item"><b id="cd-sec">—</b><span>секунд</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФИНАЛ -->
+    <section class="finale">
+      <div class="wrap">
+        <p class="eyebrow reveal">до встречи</p>
+        <div class="big-thanks reveal d1">С нетерпением ждём вас</div>
+        <div class="divider reveal d2"><svg viewBox="0 0 100 100" fill="var(--c-sage)"><circle cx="50" cy="50" r="16"/><circle cx="30" cy="50" r="10" opacity=".5"/><circle cx="70" cy="50" r="10" opacity=".5"/></svg></div>
+        <p class="lead reveal d2">Алексей и Юлия · 14 ноября</p>
+      </div>
+    </section>
+
+    <footer class="footer">Сделано с любовью · 2026</footer>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lb-close" id="lb-close">&times;</span>
+    <span class="lb-nav lb-prev" id="lb-prev">&#8249;</span>
+    <img src="" alt="Фото" id="lb-img" />
+    <span class="lb-nav lb-next" id="lb-next">&#8250;</span>
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+
+  <!-- ВЫБОР ПРИЛОЖЕНИЯ КАРТ (мобильные)  -->
+  <div class="mapsheet" id="mapsheet" aria-hidden="true">
+    <div class="mapsheet-panel" role="dialog" aria-label="Выбор приложения для маршрута">
+      <div class="mapsheet-grip"></div>
+      <div class="mapsheet-title">Построить маршрут в приложении</div>
+      <div class="mapsheet-list" id="mapsheet-list"><!-- из JS --></div>
+      <button class="mapsheet-cancel" id="mapsheet-cancel">Отмена</button>
+    </div>
+  </div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
